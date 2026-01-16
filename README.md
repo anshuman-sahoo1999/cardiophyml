@@ -3,6 +3,8 @@ CardioPhyML
 
 Physics-Inspired Machine Learning for Cardiovascular Signal Analysis
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18265663.svg)](https://doi.org/10.5281/zenodo.18265663)
+
 Overview
 --------
 
