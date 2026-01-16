@@ -1,0 +1,2 @@
+[console_scripts]
+cardiophyml = cardiophyml.cli:main

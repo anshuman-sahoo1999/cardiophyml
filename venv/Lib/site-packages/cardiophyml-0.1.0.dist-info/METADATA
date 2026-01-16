@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: cardiophyml
+Version: 0.1.0
+Requires-Python: >=3.9
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scipy
+Requires-Dist: neurokit2
+Requires-Dist: scikit-learn
+Requires-Dist: plotly
+Dynamic: requires-dist
+Dynamic: requires-python
