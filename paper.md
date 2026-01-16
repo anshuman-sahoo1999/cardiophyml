@@ -2,13 +2,12 @@
 title: "CardioPhyML: A Python Package for File-Driven Cardiovascular Signal Analysis and Interpretable Risk Modeling"
 tags:
   - Python
-  - cardiovascular signal processing
   - ECG analysis
+  - cardiovascular signal processing
   - heart rate variability
   - research software
 authors:
   - name: Anshuman Sahoo
-    orcid: 0000-0003-3719-6177
     affiliation: 1
 affiliations:
   - name: Department of Computer Science and Engineering, DRIEMS University, India
@@ -17,74 +16,120 @@ date: 2026-01-16
 bibliography: paper.bib
 ---
 
-## Summary
+## Abstract
 
-CardioPhyML is an open-source Python package designed for file-based cardiovascular signal analysis and interpretable risk modeling using physiological time-series data, particularly electrocardiogram (ECG) signals. The software enables researchers to upload structured signal datasets and obtain cleaned signals, extracted cardiac features, analytical summaries, and reproducible outputs through a unified workflow. CardioPhyML integrates signal preprocessing, heart rate variability (HRV) feature extraction, and feature-based modeling in a modular framework that supports experimental and methodological research in biomedical signal processing.
-
-The package emphasizes transparency, reproducibility, and extensibility, allowing users to adapt the pipeline for diverse datasets and research objectives. CardioPhyML is intended strictly for research and educational use and does not perform clinical diagnosis or treatment.
+CardioPhyML is an open-source Python software package developed to support reproducible research in cardiovascular signal processing through a file-driven analytical workflow. The package enables researchers to ingest physiological time-series data, particularly electrocardiogram (ECG) signals, and perform standardized preprocessing, feature extraction, and interpretable risk-oriented analysis. By integrating classical signal processing techniques with modular analytical components, CardioPhyML provides a transparent and extensible framework for experimental and methodological studies. The software emphasizes reproducibility, interpretability, and accessibility, making it suitable for academic research, education, and comparative analysis across datasets. CardioPhyML is intended strictly for non-clinical research use and does not perform diagnostic or therapeutic functions.
 
 ---
 
-## Statement of Need
+## 1. Introduction
 
-Cardiovascular signal analysis plays a central role in biomedical research, with ECG-derived features such as heart rate variability widely used for physiological assessment and methodological studies. While several tools exist for ECG processing, many are either domain-specific, tightly coupled to proprietary environments, or lack reproducible, file-driven workflows suitable for open research.
+Cardiovascular signal analysis is a foundational area in biomedical engineering and physiological research. Electrocardiogram (ECG) signals, in particular, are widely studied due to their ability to capture cardiac electrical activity and enable the derivation of meaningful physiological indicators such as heart rate variability (HRV). These indicators are frequently used in experimental studies exploring autonomic regulation, stress response, and methodological evaluation of signal processing techniques.
 
-Researchers often require lightweight, transparent software that allows them to ingest raw physiological data, apply standardized preprocessing, extract interpretable features, and evaluate analytical models without relying on opaque or monolithic systems. CardioPhyML addresses this need by providing a research-oriented Python package that emphasizes modular design, reproducible execution, and interpretability of outputs.
+Despite the availability of numerous ECG analysis tools, researchers often encounter challenges related to reproducibility, transparency, and accessibility. Many existing solutions are embedded in proprietary environments, emphasize clinical deployment, or rely on opaque modeling pipelines that limit interpretability. Furthermore, workflows that tightly couple data acquisition with analysis can hinder reproducible experimentation when working with archived or shared datasets.
 
-By focusing on file-based inputs and structured analytical outputs, CardioPhyML enables consistent experimentation, comparative studies, and educational use across datasets and research settings.
-
----
-
-## Functionality
-
-CardioPhyML provides an end-to-end workflow for cardiovascular signal analysis composed of the following components:
-
-- **Data ingestion:** Loading of ECG and physiological time-series data from structured CSV files.
-- **Signal preprocessing:** Noise reduction and normalization to prepare signals for analysis.
-- **Feature extraction:** Detection of R-peaks and computation of time-domain HRV metrics.
-- **Risk modeling:** Feature-based analytical modeling designed for interpretability rather than prediction optimization.
-- **Output generation:** Structured summaries, visualizations, and intermediate artifacts to support reproducibility.
-
-The software exposes both a Python application programming interface (API) and a command-line interface (CLI), enabling flexible integration into research pipelines and automated workflows.
+CardioPhyML addresses these challenges by offering a lightweight, open-source Python package that emphasizes file-based data ingestion, modular processing, and interpretable analytical outputs. The software is designed to facilitate reproducible research workflows, allowing users to apply consistent analysis pipelines across multiple datasets and experimental settings.
 
 ---
 
-## Design Principles
+## 2. Motivation and Statement of Need
 
-The design of CardioPhyML is guided by the following principles:
+Reproducibility is a central concern in computational and biomedical research. File-driven analysis pipelines provide a practical mechanism for ensuring that analyses can be repeated, verified, and extended by independent researchers. In the context of cardiovascular signal processing, such pipelines are particularly valuable due to the variability of data sources, sampling rates, and preprocessing requirements.
 
-1. **Reproducibility:** All analyses operate on explicit input files and generate deterministic outputs.
-2. **Modularity:** Each processing stage is implemented as an independent component, allowing customization and extension.
-3. **Transparency:** Feature extraction and modeling steps are interpretable and traceable.
-4. **Accessibility:** The package relies on widely adopted Python libraries and minimal dependencies.
+While comprehensive toolkits exist for physiological signal analysis, many focus on end-user clinical applications or black-box predictive performance. Researchers conducting methodological studies, algorithm comparisons, or educational demonstrations require software that exposes intermediate steps, supports customization, and avoids unnecessary abstraction.
 
-These principles ensure that CardioPhyML can be readily adopted and adapted by researchers with varying levels of expertise.
+CardioPhyML was developed to meet this need by providing:
+- A transparent pipeline for ECG preprocessing and feature extraction
+- Modular components that can be independently evaluated or replaced
+- Explicit input-output relationships to support reproducibility
+- Minimal assumptions about data provenance or acquisition systems
 
----
-
-## Related Work
-
-Existing ECG analysis frameworks and signal processing toolkits provide valuable functionality but often emphasize clinical deployment, proprietary ecosystems, or black-box modeling approaches. CardioPhyML complements these tools by prioritizing open research workflows, interpretability, and file-based reproducibility. The package is designed to interoperate with existing scientific Python ecosystems while maintaining a focused scope aligned with research and educational use.
+By focusing on research-oriented functionality rather than clinical deployment, CardioPhyML fills a gap between low-level signal processing libraries and application-specific platforms.
 
 ---
 
-## Limitations and Scope
+## 3. Software Architecture and Design
 
-CardioPhyML is not intended for real-time monitoring, clinical diagnosis, or medical decision-making. The software does not implement regulatory-compliant medical algorithms and should not be used in clinical environments. Its scope is limited to offline analysis of physiological time-series data for research purposes.
+CardioPhyML follows a modular architecture that separates data ingestion, signal processing, feature extraction, and analytical modeling into distinct components. This design facilitates extensibility and supports independent evaluation of each stage.
+
+### 3.1 Data Ingestion
+
+The software accepts structured CSV files containing time-series physiological signals. Users specify key parameters such as sampling frequency, enabling the package to accommodate datasets from diverse sources. This file-driven approach decouples data acquisition from analysis and supports batch processing of archived datasets.
+
+### 3.2 Signal Preprocessing
+
+Preprocessing modules implement noise reduction, normalization, and baseline correction steps commonly used in ECG analysis. These steps are configurable and explicitly documented, allowing researchers to understand and modify preprocessing behavior as required.
+
+### 3.3 Feature Extraction
+
+CardioPhyML implements classical R-peak detection algorithms and derives time-domain HRV features from detected inter-beat intervals. Feature extraction is performed in a transparent manner, exposing intermediate outputs that can be inspected or exported for further analysis.
+
+### 3.4 Analytical Modeling
+
+Rather than emphasizing predictive optimization, the modeling components focus on feature-based analytical summaries and interpretable risk-oriented indicators. This approach aligns with the needs of methodological research and avoids reliance on opaque machine learning models.
 
 ---
 
-## Availability
+## 4. Usage Workflow
 
-- **Source code:** https://github.com/anshuman-sahoo1999/cardiophyml  
-- **License:** MIT  
-- **Archive and DOI:** https://doi.org/10.5281/zenodo.18265663  
+A typical CardioPhyML workflow consists of the following steps:
+
+1. Upload a physiological signal file in CSV format
+2. Configure analysis parameters such as sampling rate
+3. Execute preprocessing and feature extraction
+4. Generate structured outputs and visualizations
+5. Export results for reporting or comparative analysis
+
+The package provides both a Python API and a command-line interface, enabling integration into scripted experiments, notebooks, and automated pipelines.
+
+---
+
+## 5. Reproducibility and Extensibility
+
+Reproducibility is achieved through deterministic processing, explicit parameter specification, and structured output generation. All intermediate and final outputs can be saved and shared, enabling independent verification of results.
+
+Extensibility is supported through:
+- Modular code organization
+- Clear separation of concerns
+- Minimal external dependencies
+- Documentation and example workflows
+
+Researchers can extend CardioPhyML by implementing alternative preprocessing methods, feature sets, or analytical modules without modifying the core architecture.
+
+---
+
+## 6. Related Work
+
+Numerous frameworks and toolkits exist for ECG and physiological signal analysis. Many provide advanced functionality but prioritize clinical deployment, proprietary integration, or black-box modeling. CardioPhyML complements these efforts by focusing on open research workflows, interpretability, and file-based reproducibility. The package draws upon established principles in signal processing and heart rate variability analysis [@malik1996hrv; @pan1985qrs; @acharya2006ecg].
+
+---
+
+## 7. Limitations and Scope
+
+CardioPhyML is not intended for real-time signal processing, clinical diagnosis, or medical decision support. The software does not implement regulatory-compliant algorithms and should not be used in clinical environments. Its scope is limited to offline analysis of physiological time-series data for research, educational, and methodological purposes.
+
+---
+
+## 8. Availability and Maintenance
+
+The source code for CardioPhyML is publicly available under the MIT License. Versioned releases are archived with persistent identifiers to support citation and long-term access.
+
+- Source code: https://github.com/anshuman-sahoo1999/cardiophyml  
+- DOI: https://doi.org/10.5281/zenodo.18265663  
+
+The project follows open-source development practices, and contributions from the research community are encouraged.
+
+---
+
+## 9. Conclusion
+
+CardioPhyML provides a transparent, reproducible, and extensible framework for cardiovascular signal analysis in research settings. By emphasizing file-driven workflows and interpretable analytical components, the software supports methodological experimentation, educational use, and comparative studies across datasets. The package contributes to open scientific practice by lowering barriers to reproducible cardiovascular signal analysis using widely adopted Python tools.
 
 ---
 
 ## Acknowledgements
 
-The author acknowledges the contributions of the open-source scientific Python community and prior research in biomedical signal processing and heart rate variability analysis, which informed the development of this software.
+The development of CardioPhyML was informed by established research in biomedical signal processing and heart rate variability analysis, as well as the contributions of the open-source scientific Python community.
 
 ---
 
