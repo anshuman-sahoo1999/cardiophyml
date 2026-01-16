@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools >= 64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cardiophyml"
+version = "0.1.0"
+description = "Physics-Informed Machine Learning for Cardiovascular Risk Assessment"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "neurokit2",
+    "scikit-learn",
+    "plotly"
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+cardiophyml = "cardiophyml.cli:main"
