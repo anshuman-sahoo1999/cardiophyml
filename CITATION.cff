@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: CardioPhyML
+message: If you use this software, please cite it.
+authors:
+  - family-names: Sahoo
+    given-names: Anshuman
+version: 0.1.0
+doi: 10.5281/zenodo.18265663
+url: https://github.com/anshuman-sahoo1999/cardiophyml
+license: MIT
